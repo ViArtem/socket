@@ -113,11 +113,13 @@ socket.on("add user", async (data) => {
 });
 
 //User finder block
+//let userId
 socket.on("find user", (data) => {
   let newFound = document.createElement("li");
   if (data.found) {
     userFullNameValue = `${data.userFirstName} ${data.userLastName}`;
     userNumberValue = `${data.userNumber}`;
+    //userId = `${data.id}`;
     newFound.innerHTML = `A search request for the user ${data.userFirstName} ${data.userLastName} has been sent`;
     $allMessage.append(newFound);
     foundUserFromDatabaseData = `${data.userFirstName} ${data.userLastName} : ${data.userNumber}`;

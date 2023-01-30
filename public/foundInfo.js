@@ -27,7 +27,7 @@ function addUserDataToPage() {
       document.querySelector(".buttonSocketEdit").classList.add("hideButton"); // edit button
       document.querySelector(".buttonSocketDelete").classList.add("hideButton");
     }
-  }, 250);
+  }, 2500);
 }
 
 // Delete the user

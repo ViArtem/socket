@@ -41,6 +41,7 @@ function socketData() {
     });
 
     //User search
+    let foundUserId;
     socket.on("find user value", async (data) => {
       console.log("datd:" + JSON.stringify(data));
       let foundData = await findUserByName(data);
@@ -50,7 +51,10 @@ function socketData() {
           found: false,
         });
       } else {
+        foundUserId = foundData._id;
+        //console.log(foundUserId);
         io.sockets.emit("find user", {
+          id: foundData._id,
           userFirstName: foundData.name.firstName,
           userLastName: foundData.name.lastName,
           userNumber: foundData.number,
