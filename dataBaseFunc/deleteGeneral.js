@@ -2,7 +2,7 @@ import Person from "../models/users.js";
 import { userName, userLastname } from "../Routes/findSocket.js";
 
 //Deletes the user from the database
-async function delleteUserFromDatabaseFunction() {
+async function delleteUserFromDatabaseFunction(userName, userLastname) {
   try {
     await Person.deleteOne({
       name: { firstName: userName, lastName: userLastname },

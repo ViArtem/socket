@@ -6,6 +6,8 @@ import { largeFirstLiters } from "../otherFunc/AllLargeLieter.js";
 
 import { findUserByName } from "./findSocket.js";
 
+import { splitFullName } from "../otherFunc/string.js";
+
 import { delleteUserFromDatabaseFunction } from "../dataBaseFunc/deleteGeneral.js";
 
 import { updateUser } from "./editSocket.js";
@@ -60,7 +62,10 @@ function socketData() {
     // Deleting a user
     socket.on("delete user value", async (data) => {
       console.log("SocketData" + " " + JSON.stringify(data));
-      await delleteUserFromDatabaseFunction();
+      await delleteUserFromDatabaseFunction(
+        splitFullName(data.fullName)[0],
+        splitFullName(data.fullName)[1]
+      );
       io.sockets.emit("delete user", {
         userFirstName: data,
         deleted: true,

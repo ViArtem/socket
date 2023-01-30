@@ -1,11 +1,13 @@
 import { userFullNameValue, userNumberValue } from "./socketRequest.js";
-
+let valueFindInput;
 // Display of the found user
-
 let $findSocketButton = document.querySelector(".userFindSocketButton");
 $findSocketButton.addEventListener("click", addUserDataToPage);
 
 function addUserDataToPage() {
+  let $inputFullNameFind = document.querySelector("#socketFindInput").value;
+  valueFindInput = $inputFullNameFind;
+
   setTimeout(async () => {
     let foundUser = await import("./socketRequest.js");
     let foundSocketSubtitle = document.querySelector(
@@ -83,3 +85,5 @@ function hiddenEditBlock() {
     document.querySelector(".buttonSocketDelete").classList.add("hideButton");
   }, 100);
 }
+
+export { valueFindInput };

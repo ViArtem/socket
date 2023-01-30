@@ -1,3 +1,5 @@
+import { valueFindInput } from "./foundInfo.js";
+
 let socket = io.connect();
 
 let foundUserFromDatabaseData;
@@ -21,12 +23,12 @@ $addForm.addEventListener("submit", (event) => {
 //User finder form
 let $findForm = document.querySelector(".socketFindForm");
 let $inputFullNameFind = document.querySelector("#socketFindInput");
-let $forUpdateValidation;
+
 $findForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  $forUpdateValidation = $inputFullNameFind.value;
+
   socket.emit("find user value", {
-    fullName: $inputFullNameFind.value,
+    fullName: valueFindInput,
   });
   $inputFullNameFind.value = "";
 });
@@ -36,7 +38,7 @@ let $deleteButton = document.querySelector(".formSocketDelete");
 $deleteButton.addEventListener("submit", (event) => {
   event.preventDefault();
   socket.emit("delete user value", {
-    fullName: foundUserFromDatabaseData,
+    fullName: valueFindInput, //foundUserFromDatabaseData,
   });
 });
 

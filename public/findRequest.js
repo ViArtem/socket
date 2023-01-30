@@ -30,6 +30,7 @@ window.addEventListener("load", () => {
 function addUserDataToPage(dataUser) {
   let foundHttpSubtitle = document.querySelector(".subtitleFoundUser");
   if (dataUser != "User no found") {
+    console.log(dataUser);
     // Shows the user found
     foundHttpSubtitle.innerHTML = `${dataUser.name.firstName} ${dataUser.name.lastName}: ${dataUser.number}`;
     document.querySelector(".buttonHttpEdit").classList.remove("hideButton"); // кнопка редагування
