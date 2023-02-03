@@ -33,9 +33,14 @@ routerAuth.post("/auth", async (req, res) => {
       //генерація Accsess токена
       userToken = genAccsessToken(userAuth._id, userAuth.userName);
 
-      userTokens = `Bearer ${userToken}`;
-      //  res.setHeader("Authorization", userToken);
-      res.send({ value: userToken });
+      userTokens = userToken;
+      console.log(userToken);
+      res.cookie("token", userTokens, {
+        httpOnly: true,
+        maxAge: 10000,
+      });
+      //res.setHeader("Authorization", userToken);
+      return res.send({ value: userToken });
     }
   } catch (e) {
     console.log(e);

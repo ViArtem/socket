@@ -2,8 +2,12 @@ import { Router } from "express";
 const routerGet = Router();
 import path from "path";
 
-import { userToken } from "../registRoute/auth.js";
+import { userTokens } from "../registRoute/auth.js";
 
+import { createRequire } from "node:module";
+
+const require = createRequire(import.meta.url);
+let cookieParser = require("cookie-parser");
 // check regist
 import { checkRegist } from "../otherFunc/ifRegist.js";
 
@@ -15,7 +19,7 @@ routerGet.get("/", checkRegist, (req, res) => {
   res.render(path.resolve("view", "index.html"));
 });
 
-routerGet.get("/auth", async (req, res) => {
+routerGet.get("/auth", cookieParser(), async (req, res) => {
   res.render(path.resolve("view", "authorization.html"));
 });
 

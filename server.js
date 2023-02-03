@@ -1,7 +1,8 @@
 import express from "express";
 import { createRequire } from "node:module";
 import path from "path";
-
+const require = createRequire(import.meta.url);
+let cookieParser = require("cookie-parser");
 import { routerGet } from "./Routes/getRouter.js";
 
 import { startHttpServer } from "./startServers/httpServ.js";
@@ -28,7 +29,7 @@ import { routerRegist } from "./registRoute/regist.js";
 import { userTokens } from "./registRoute/auth.js";
 
 const app = express();
-const require = createRequire(import.meta.url);
+
 let bodyParser = require("body-parser");
 
 app.set("view engine", "html");
@@ -37,7 +38,6 @@ const customHeadersAppLevel = function (req, res, next) {
   req.headers["Authorization"] = userTokens;
   next();
 };
-
 //app.use(customHeadersAppLevel);
 // app.use('/', function (req, res) {
 //   let url = config.API_HOST + req.ur
@@ -46,19 +46,21 @@ const customHeadersAppLevel = function (req, res, next) {
 // })
 
 let allMiddleware = [
-  customHeadersAppLevel, // встановлення кастомних заголовків
+  //customHeadersAppLevel, // встановлення кастомних заголовків
   routerGet,
   bodyParser.urlencoded({ extended: true }),
   express.static(path.resolve("public")),
   express.json({
     type: ["application/json", "text/plain"],
   }),
+
   routerAuth,
   routerRegist,
   routerdel,
   routerAdd,
   routerEdit,
   router,
+  // cookieParser(),
 ];
 
 allMiddleware.forEach((elm) => app.use(elm));

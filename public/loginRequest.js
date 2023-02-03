@@ -22,7 +22,7 @@ window.addEventListener("load", () => {
     console.log(result.value);
     if (result.value) {
       window.localStorage.setItem("Authorization", `Bearer ${result.value}`);
-      authToken = `Bearer ${result.value}`;
+      // authToken = `Bearer ${result.value}`;
 
       //console.log(localStorage.getItem("Authorization"));
       // let headers = new Headers();
