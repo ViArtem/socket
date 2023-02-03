@@ -1,8 +1,9 @@
-import { valueFindInput } from "./foundInfo.js";
+import { valueFindInput, idUserForEditing } from "./foundInfo.js";
 
 let socket = io.connect();
 
 let foundUserFromDatabaseData;
+let idFoundUserFromDatabaseData;
 let userFullNameValue;
 let userNumberValue;
 
@@ -53,9 +54,10 @@ $editForm.addEventListener("submit", (event) => {
   socket.emit("edit user value", {
     newFullName: $updateFullNameInput.value,
     newNumber: $updateNumberInput.value,
+    idForUpdate: idUserForEditing,
   });
   $updateFullNameInput.value = "";
-  $updateNumberInput = "";
+  $updateNumberInput.value = "";
 });
 
 //Block with user editing
@@ -81,10 +83,9 @@ socket.on("edit user", (data) => {
     $allUserListBlock.append(newUserList);
     // deleting the old value
     let allUserForEdit = document.querySelectorAll(".userSubtitleList");
-    console.log(userFullNameValue);
+    //console.log(userFullNameValue);
     for (let i = 0; i < allUserForEdit.length; i++) {
-      console.log(allUserForEdit[i].innerHTML);
-      if (`${allUserForEdit[i].innerHTML}` == `${userFullNameValue}`) {
+      if (`${allUserForEdit[i].innerHTML}` == `${valueFindInput}`) {
         allUserForEdit[i].remove();
         break;
       }
@@ -123,6 +124,7 @@ socket.on("find user", (data) => {
     newFound.innerHTML = `A search request for the user ${data.userFirstName} ${data.userLastName} has been sent`;
     $allMessage.append(newFound);
     foundUserFromDatabaseData = `${data.userFirstName} ${data.userLastName} : ${data.userNumber}`;
+    idFoundUserFromDatabaseData = data.id;
     $enptyLi.remove();
   } else {
     foundUserFromDatabaseData = "";
@@ -164,4 +166,9 @@ socket.on("delete user", (data) => {
   //
 });
 
-export { foundUserFromDatabaseData, userFullNameValue, userNumberValue };
+export {
+  foundUserFromDatabaseData,
+  idFoundUserFromDatabaseData,
+  userFullNameValue,
+  userNumberValue,
+};

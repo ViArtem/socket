@@ -1,21 +1,43 @@
-import { userFullNameValue, userNumberValue } from "./socketRequest.js";
+//import { userIdForEdit, userDataForEdit } from "./idForUpdate.js";
 let valueFindInput;
+let foundSocketSubtitle;
+let idUserForEditing;
+
+function splitFullName(fullname) {
+  let fulln = fullname.split(" ").filter((w) => w != "");
+
+  if (fulln.length < 2) {
+    return ["Data", "undefined"];
+  } else return fulln;
+}
+
 // Display of the found user
 let $findSocketButton = document.querySelector(".userFindSocketButton");
 $findSocketButton.addEventListener("click", addUserDataToPage);
 
 function addUserDataToPage() {
-  let $inputFullNameFind = document.querySelector("#socketFindInput").value;
+  let $inputFullNameFind = document
+    .querySelector("#socketFindInput")
+    .value.trim();
   valueFindInput = $inputFullNameFind;
 
   setTimeout(async () => {
     let foundUser = await import("./socketRequest.js");
-    let foundSocketSubtitle = document.querySelector(
-      ".socketSubtitleFoundUser"
-    );
+    foundSocketSubtitle = document.querySelector(".socketSubtitleFoundUser");
 
-    if (foundUser.foundUserFromDatabaseData != "") {
+    if (
+      foundUser.foundUserFromDatabaseData != "" &&
+      foundUser.foundUserFromDatabaseData != undefined &&
+      $inputFullNameFind != ""
+    ) {
+      //
       foundSocketSubtitle.innerHTML = foundUser.foundUserFromDatabaseData;
+      //
+      let userIdForUpdate = document.createElement("p");
+      userIdForUpdate.innerHTML = foundUser.idFoundUserFromDatabaseData;
+      userIdForUpdate.classList.add("hideButton");
+      idUserForEditing = userIdForUpdate.innerHTML;
+      //
       document
         .querySelector(".buttonSocketEdit")
         .classList.remove("hideButton"); // edit button
@@ -51,8 +73,12 @@ $updateSocketButton.addEventListener("click", () => {
   document.querySelector(".editSocketBlock").classList.remove("hidenEditBlock");
 
   //Filling in input fields socketEditFullNameInput
-  document.querySelector("#socketEditFullNameInput").value = userFullNameValue;
-  document.querySelector("#socketEditNumberInput").value = userNumberValue;
+  document.querySelector("#socketEditFullNameInput").value = `${
+    splitFullName(foundSocketSubtitle.innerHTML)[0]
+  } ${splitFullName(foundSocketSubtitle.innerHTML)[1]}`; // userFullNameValue;
+  document.querySelector("#socketEditNumberInput").value = splitFullName(
+    foundSocketSubtitle.innerHTML
+  )[3];
   //
 
   //Hiding all blocks except editing
@@ -86,4 +112,4 @@ function hiddenEditBlock() {
   }, 100);
 }
 
-export { valueFindInput };
+export { valueFindInput, idUserForEditing };

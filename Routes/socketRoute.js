@@ -79,7 +79,11 @@ function socketData() {
     // Editing a user
     socket.on("edit user value", async (data) => {
       console.log("SocketData" + " " + JSON.stringify(data));
-      let update = await updateUser(data.newFullName, data.newNumber);
+      let update = await updateUser(
+        data.newFullName,
+        data.newNumber,
+        data.idForUpdate
+      );
       if (update) {
         io.sockets.emit("edit user", {
           userFirstName: data.newFullName,

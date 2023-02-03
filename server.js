@@ -19,37 +19,59 @@ import { router } from "./Routes/find.js";
 //Update
 import { routerEdit } from "./Routes/edit.js";
 
+//authorization
+import { routerAuth } from "./registRoute/auth.js";
+
+//regist
+import { routerRegist } from "./registRoute/regist.js";
+
+import { userTokens } from "./registRoute/auth.js";
+
 const app = express();
 const require = createRequire(import.meta.url);
 let bodyParser = require("body-parser");
 
 app.set("view engine", "html");
 
+const customHeadersAppLevel = function (req, res, next) {
+  req.headers["Authorization"] = userTokens;
+  next();
+};
+
+//app.use(customHeadersAppLevel);
+// app.use('/', function (req, res) {
+//   let url = config.API_HOST + req.ur
+//   req.headers['authorization'] = 'someValue'
+//   req.pipe(request(url)).pipe(res)
+// })
+
 let allMiddleware = [
+  customHeadersAppLevel, // встановлення кастомних заголовків
+  routerGet,
   bodyParser.urlencoded({ extended: true }),
   express.static(path.resolve("public")),
   express.json({
     type: ["application/json", "text/plain"],
   }),
+  routerAuth,
+  routerRegist,
   routerdel,
   routerAdd,
   routerEdit,
   router,
-  routerGet,
 ];
 
-for (let i = 0; i < allMiddleware.length; i++) {
-  app.use(allMiddleware[i]);
-}
+allMiddleware.forEach((elm) => app.use(elm));
 
 app.engine("html", require("ejs").renderFile);
 
 //A function that starts a socket server. If it fails to start, the normal http server
+
 (function startServer() {
   try {
-    let startSocketServerLet = startSocketServer();
-    if (startSocketServerLet == false) {
-      startHttpServer();
+    //let startSocketServerLet = startSocketServer();
+    if (!startSocketServer()) {
+      console.log(startHttpServer());
     }
   } catch (e) {
     console.log(e);

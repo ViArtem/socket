@@ -1,6 +1,8 @@
 import Person from "../models/users.js";
 
 import { largeFirstLiters } from "../otherFunc/AllLargeLieter.js";
+
+//let ins = await import("../public/foundInfo.js");
 //Сhanges the user in the database
 async function editUserSocket(
   newUserFirstName,

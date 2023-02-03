@@ -17,6 +17,7 @@ function startSocketServer() {
       console.log("Started socket...");
     });
     socketData();
+    return true;
   } catch (error) {
     console.log(error);
     return false;

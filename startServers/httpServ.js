@@ -5,8 +5,9 @@ const PORT = process.env.PORT || 3000;
 function startHttpServer() {
   app.listen(PORT, () => {
     connectToDatabase();
-    console.log("Start...");
+    //console.log("Start...");
   });
+  return "Start...";
 }
 
 export { startHttpServer };

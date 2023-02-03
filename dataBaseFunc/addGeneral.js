@@ -8,7 +8,7 @@ async function addUserToDatabase(firstName, lastName, number) {
         firstName: largeFirstLiters(firstName),
         lastName: largeFirstLiters(lastName),
       },
-      number: number,
+      number,
     });
     await newUser.save();
     return newUser;

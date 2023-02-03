@@ -1,15 +1,15 @@
 import { foundUser } from "../Routes/findSocket.js";
 import { editUserSocket } from "../dataBaseFunc/editFuncSocket.js";
 import { splitFullName } from "../otherFunc/string.js";
-
+//import { userIdForEdit, userDataForEdit } from "../public/idForUpdate.js";
 let userIdWeAreUpdating;
 let newUserFirstName;
 let newUserLastName;
 let newUserNum;
 
-async function updateUser(name, number) {
+async function updateUser(name, number, id) {
   try {
-    console.log(`Наші дані ${name} ${number}`);
+    console.log(`Наші дані ${name} ${number} ${id}`);
     //New number validation
     const regularExpretionNumber =
       /^(?:\+[1-9]{1,3})?(?:[0-9]{3}[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|044[ .-]?[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{2}|044[0-9]{7})$/; ///^[\+][1-9]{1,4}\d{10,11}/
@@ -25,7 +25,7 @@ async function updateUser(name, number) {
       newUserFirstName = splitFullName(name)[0];
       newUserLastName = splitFullName(name)[1];
       newUserNum = number;
-      userIdWeAreUpdating = foundUser.id;
+      //userIdWeAreUpdating = foundUser.id;
       if (newUserLastName == "undefined") {
         console.log("Enter fullname");
         return false;
@@ -33,7 +33,7 @@ async function updateUser(name, number) {
         let userUpdateData = await editUserSocket(
           newUserFirstName,
           newUserLastName,
-          userIdWeAreUpdating,
+          id,
           newUserNum
         );
         console.log("The user is updated");

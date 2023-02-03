@@ -202,9 +202,22 @@
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    console.log(window.localStorage.getItem("Authorization"));
+  const $api = axios.create({
+    withCredentials: true,
+    baseUrl: 'http://localhost:3000/'
+  })
+
+  $api.interceptors.request.use((config)=>{
+  config.headers.Authorization = window.localStorage.getItem("Authorization")
+  return config
+  })
+  </script>
 
 
-
+  
  <!-- http scripts -->
   <script type="module" src="findRequest.js"></script>
   <script type="module" src="addRequest.js"></script>
@@ -214,8 +227,12 @@
 
   <!-- socket scripts -->
   <script  src="/socket.io/socket.io.js"></script>
+  
   <script type="module" src="socketRequest.js"></script>
   <script type="module" src="foundInfo.js"></script>
+
+  <!-- <script src="loginRequest.js"></script> -->
+
 
 
   <!-- <script type="module" src="longPolling.js"></script> -->
