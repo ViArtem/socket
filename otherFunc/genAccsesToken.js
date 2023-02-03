@@ -1,5 +1,7 @@
 //генерація аксес токена
-import { key } from "../key.js";
+import dotev from "dotenv";
+dotev.config();
+const key = process.env.KEY;
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 let jwt = require("jsonwebtoken");
@@ -9,7 +11,7 @@ function genAccsessToken(id, username) {
     username,
   };
 
-  return jwt.sign(payload, key, { expiresIn: "40s" });
+  return jwt.sign(payload, key, { expiresIn: "100s" });
 }
 
 export { genAccsessToken };

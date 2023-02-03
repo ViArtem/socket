@@ -1,8 +1,8 @@
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 let jwt = require("jsonwebtoken");
-import path from "path";
-import { key } from "../key.js";
+
+const key = process.env.KEY;
 function checkRegist(req, res, next) {
   if (req.method === "OPTIONS") {
     next();
