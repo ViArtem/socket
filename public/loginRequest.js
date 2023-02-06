@@ -13,28 +13,18 @@ window.addEventListener("load", () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
-        //Authorization: "",
       },
       body: JSON.stringify(authNewUserData),
     });
 
     let result = await response.json();
     console.log(result.value);
+
     if (result.value) {
-      window.localStorage.setItem("Authorization", `Bearer ${result.value}`);
-      // authToken = `Bearer ${result.value}`;
-
-      //console.log(localStorage.getItem("Authorization"));
-      // let headers = new Headers();
-      // headers.append("Authorization", "Bearer " + result.token);
-      // let respons = await fetch("/", {
-      //   method: "GET",
-      //   headers: {
-      //     Authorization: window.localStorage.getItem("Authorization"),
-      //   },
-      // });
-
+      window.localStorage.setItem("Authorization", result.value);
       window.location.href = "/";
+    } else if (result.success == "noUser") {
+      alert("Такого користувача не існує, зареєструйтесь");
     } else {
       alert("Incorrect validation");
     }

@@ -2,8 +2,6 @@ import { Router } from "express";
 const routerGet = Router();
 import path from "path";
 
-import { userTokens } from "../registRoute/auth.js";
-
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
@@ -14,8 +12,7 @@ import { checkRegist } from "../otherFunc/ifRegist.js";
 //A function that finds all users available in the database
 import { findAllPersonFromeDatabase } from "../dataBaseFunc/findAllPerson.js";
 
-routerGet.get("/", checkRegist, (req, res) => {
-  console.log(req.headers);
+routerGet.get("/", checkRegist, cookieParser(), (req, res) => {
   res.render(path.resolve("view", "index.html"));
 });
 
@@ -30,6 +27,15 @@ routerGet.get("/regist", async (req, res) => {
 routerGet.get("/allUser", async (req, res) => {
   let allUser = await findAllPersonFromeDatabase();
   res.send(allUser);
+});
+
+routerGet.get("/userValue", checkRegist, async (req, res) => {
+  res.send(req.user);
+});
+
+routerGet.get("/exit", checkRegist, async (req, res) => {
+  res.clearCookie("token");
+  return res.sendStatus(200);
 });
 
 export { routerGet };

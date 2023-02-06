@@ -1,5 +1,13 @@
 import { valueFindInput, idUserForEditing } from "./foundInfo.js";
 
+function splitFullName(fullname) {
+  let fulln = fullname.split(" ").filter((w) => w != "");
+
+  if (fulln.length < 2) {
+    return ["Data", "undefined"];
+  } else return fulln;
+}
+
 let socket = io.connect();
 
 let foundUserFromDatabaseData;

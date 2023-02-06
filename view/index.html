@@ -3,230 +3,310 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
+    <meta name="viewport" content="width=1310" />
     <link rel="stylesheet" href="style.css" />
     <title>websocketHttpRequest</title>
   </head>
   <body>
+    <div class="wrapper">
+      <div class="allContainer">
+        <div class="virivn">
+          <!-- Блок з наявними користувачами -->
+          <div class="userListBlock">
+            <div class="userList">
+              <h1 class="userListHeader">Available phone numbers</h1>
+              <div class="nameList"></div>
+            </div>
+          </div>
 
-    <div class="socketBlockContainer">
-    <!-- Блок з наявними користувачами -->
-    <div class="userListBlock">
-      <div class="userList">
-        <h1 class="userListHeader">Available phone numbers</h1>
-        <div class="nameList"></div>
-      </div>
-    </div>
-
-
-    <!-- Блок для сокетів -->
-    <div class="socketBlock">
-        <div class="conteudo">
-          <div class="carrousel">
-            <article class="hidenEditBlock editSocketBlock ">
-              <div class="editUsersSocketBlock divSize colour">
-                <div>
-                <h1 class="socketEditHeader">Edit number</h1>
-                        <br/> 
+          <div class="socketBlockContainer">
+            <!-- Блок для сокетів -->
+            <div class="socketBlock">
+              <!--  -->
+              <div class="users buttonHidenForEdit">
+                <div class="exit">Exit</div>
+              </div>
+              <!--  -->
+              <div class="conteudo">
+                <div class="carrousel">
+                  <article class="hidenEditBlock editSocketBlock">
+                    <div class="editUsersSocketBlock divSize colour">
+                      <div>
+                        <h1 class="socketEditHeader">Edit number</h1>
+                        <br />
                         <form id="editUserSocketForm">
                           <label for="">Enter full name</label>
-                          <br/>
-                          <input type="text" id="socketEditFullNameInput" name="editserSocketFullName" required>
-                          <br/>
-                          <br/>
+                          <br />
+                          <input
+                            type="text"
+                            id="socketEditFullNameInput"
+                            name="editserSocketFullName"
+                            required
+                          />
+                          <br />
+                          <br />
                           <label for="">Enter number</label>
-                          <br/>
-                          <input type="text" id="socketEditNumberInput" name="editUserSocketNumber" maxlength="13" minlength="12" placeholder="+380687659752" required>
-                          <br/>
-                          <br/>
-                          <button type="submit" class="button okSocketEditButton">Ok</button>
-                          <button type="submit" class="button cancelSocketEditButton">Cancel</button>
+                          <br />
+                          <input
+                            type="text"
+                            id="socketEditNumberInput"
+                            name="editUserSocketNumber"
+                            maxlength="13"
+                            minlength="12"
+                            placeholder="+380687659752"
+                            required
+                          />
+                          <br />
+                          <br />
+                          <button
+                            type="submit"
+                            class="button okSocketEditButton"
+                          >
+                            Ok
+                          </button>
+                          <button
+                            type="submit"
+                            class="button cancelSocketEditButton"
+                          >
+                            Cancel
+                          </button>
                         </form>
+                      </div>
                     </div>
-              </div>
-            </article>
+                  </article>
 
-            <article class="card forUpdate buttonHidenForEdit">
-                <div>
-                    <h1 class="socketFindHeader">Find number</h1>
-                    <br/> 
-                    <form class="socketFindForm">
-                    
-                      <label for="">Enter full name</label>
-                      <br/>
-                      <br/>
-                      <input type="text" id="socketFindInput" required>
-                      <br/>
-                      <br/>
-                      <button type="submit" class="button userFindSocketButton">Find</button>
-                    </form>
+                  <article class="card forUpdate buttonHidenForEdit">
+                    <div>
+                      <h1 class="socketFindHeader">Find number</h1>
+                      <br />
+                      <form class="socketFindForm">
+                        <label for="">Enter full name</label>
+                        <br />
+                        <br />
+                        <input type="text" id="socketFindInput" required />
+                        <br />
+                        <br />
+                        <button
+                          type="submit"
+                          class="button userFindSocketButton"
+                        >
+                          Find
+                        </button>
+                      </form>
+                    </div>
+                  </article>
+
+                  <article class="card forUpdate buttonHidenForEdit">
+                    <div class="addSocketBlock">
+                      <h1 class="socketFindHeader">Add number</h1>
+                      <br />
+                      <form class="addSocketForm">
+                        <label for="">Enter full name</label>
+                        <br />
+                        <input type="text" id="socketAddNameInput" required />
+                        <br />
+                        <br />
+                        <label for="">Enter number</label>
+                        <br />
+                        <input
+                          type="text"
+                          id="socketAddNumberInput"
+                          maxlength="13"
+                          minlength="12"
+                          placeholder="+380687659752"
+                          required
+                        />
+                        <br />
+                        <br />
+                        <button type="submit" class="button">Add</button>
+                      </form>
+                    </div>
+                  </article>
+
+                  <article class="card forUpdate buttonHidenForEdit">
+                    <div class="foundSocketBlock">
+                      <h1 class="foundUserSocket">Found User</h1>
+                      <br />
+                      <p class="socketSubtitleFoundUser">No user found</p>
+                      <br />
+                      <button class="button hideButton buttonSocketEdit">
+                        Update
+                      </button>
+                      <form class="formSocketDelete">
+                        <button class="button hideButton buttonSocketDelete">
+                          Delete
+                        </button>
+                      </form>
+                    </div>
+                  </article>
+                  <article class="card forUpdate buttonHidenForEdit operations">
+                    <div class="findSocketBlock">
+                      <h1 class="operationsSocket">Operations</h1>
+                      <ul class="socketList">
+                        <li class="socketLi">Empty</li>
+                      </ul>
+                    </div>
+                  </article>
                 </div>
-            </article>
-
-            <article class="card forUpdate buttonHidenForEdit">
-              <div class="addSocketBlock">
-                <h1 class="socketFindHeader">Add number</h1>
-                <br/> 
-                <form class="addSocketForm">
-                  <label for="">Enter full name</label>
-                  <br/>
-                  <input type="text" id="socketAddNameInput" required>
-                  <br/>
-                  <br/>
-                  <label for="">Enter number</label>
-                  <br/>
-                  <input type="text" id="socketAddNumberInput"   maxlength="13" minlength="12" placeholder="+380687659752" required>
-                  <br/>
-                  <br/>
-                  <button type="submit" class="button">Add</button>
-                </form>
               </div>
-            </article>
+            </div>
 
-            <article class="card forUpdate buttonHidenForEdit">
-              <div class="foundSocketBlock ">
-                <h1 class="foundUserSocket">Found User</h1>
-                <br/>
-                <p class="socketSubtitleFoundUser" >No user found</p>
-                <br/>
-                <button class="button hideButton buttonSocketEdit">Update</button>
-                <form class="formSocketDelete"><button class="button hideButton buttonSocketDelete">Delete</button></form>
-              </div>
-             
-            </article>
-            <article class="card forUpdate buttonHidenForEdit">
-              <div class="findSocketBlock ">
-                <h1 class="operationsSocket">Operations</h1>
-                <ul class="socketList">
-                    <li class="socketLi">Empty</li>
-                </ul>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    </div>
-      <!-- Блок для http -->
-      <div class="">
-        <div class="conteudo httpBlock">
-          <div class="carrousel">
-            <article class="hidenEditBlock editBlock">
-              <div class="editUsersHttpBlock divSize">
-                <div>
-                <h1 class="httpEditHeader">Edit number</h1>
-                        <br/> 
+            <!-- Блок для http -->
+            <div class="">
+              <div class="conteudo httpBlock">
+                <div class="carrousel">
+                  <article class="hidenEditBlock editBlock">
+                    <div class="editUsersHttpBlock divSize">
+                      <div>
+                        <h1 class="httpEditHeader">Edit number</h1>
+                        <br />
                         <form id="editUserHttpForm">
                           <label for="">Enter full name</label>
-                          <br/>
-                          <input type="text" id="httpEditFullNameInput" name="editserFullName" required>
-                          <br/>
-                          <br/>
+                          <br />
+                          <input
+                            type="text"
+                            id="httpEditFullNameInput"
+                            name="editserFullName"
+                            required
+                          />
+                          <br />
+                          <br />
                           <label for="">Enter number</label>
-                          <br/>
-                          <input type="text" id="httpEditNumberInput" name="editUserNumber" maxlength="13" minlength="12" placeholder="+380687659752" required>
-                          <br/>
-                          <br/>
+                          <br />
+                          <input
+                            type="text"
+                            id="httpEditNumberInput"
+                            name="editUserNumber"
+                            maxlength="13"
+                            minlength="12"
+                            placeholder="+380687659752"
+                            required
+                          />
+                          <br />
+                          <br />
                           <button type="submit" class="button">Ok</button>
-                          <button type="submit" class="button cancelEditButton">Cancel</button>
+                          <button type="submit" class="button cancelEditButton">
+                            Cancel
+                          </button>
                         </form>
+                      </div>
                     </div>
-              </div>
-            </article>
-            <article class=" divSize forUpdate buttonHidenForEdit">
-              <div class="findHttpBlock  divSize">
-                <div>
-                <h1 class="httpFindHeader">Find number</h1>
-                <br/> 
-                <form action="/find" method="post" id="httpFindDataForm">
-                
-                  <label for="">Enter full name</label>
-                  <br/>
-                  <br/>
-                  <input type="text" id="httpFindInput" name="findUserFullName" required>
-                  <br/>
-                  <br/>
-                  <button type="submit" class="button">Find</button>
-                </form>
-                </div>
-              </div>
-    
-            </article>
-            <article class=" forUpdate buttonHidenForEdit">
-              <div class="addUsersHttpBlock divSize">
-                <div>
-                <h1 class="httpAddHeader">Add number</h1>
-                        <br/> 
+                  </article>
+                  <article class="divSize forUpdate buttonHidenForEdit">
+                    <div class="findHttpBlock divSize">
+                      <div>
+                        <h1 class="httpFindHeader">Find number</h1>
+                        <br />
+                        <form
+                          action="/find"
+                          method="post"
+                          id="httpFindDataForm"
+                        >
+                          <label for="">Enter full name</label>
+                          <br />
+                          <br />
+                          <input
+                            type="text"
+                            id="httpFindInput"
+                            name="findUserFullName"
+                            required
+                          />
+                          <br />
+                          <br />
+                          <button type="submit" class="button">Find</button>
+                        </form>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="forUpdate buttonHidenForEdit">
+                    <div class="addUsersHttpBlock divSize">
+                      <div>
+                        <h1 class="httpAddHeader">Add number</h1>
+                        <br />
                         <form id="addUserHttpForm">
                           <label for="">Enter full name</label>
-                          <br/>
-                          <input type="text" id="httpAddFullNameInput" name="addUserFullName" required>
-                          <br/>
-                          <br/>
+                          <br />
+                          <input
+                            type="text"
+                            id="httpAddFullNameInput"
+                            name="addUserFullName"
+                            required
+                          />
+                          <br />
+                          <br />
                           <label for="">Enter number</label>
-                          <br/>
-                          <input type="text" id="httpAddNumberInput" name="addUserNumber" maxlength="13" minlength="12" placeholder="+380687659752" required>
-                          <br/>
-                          <br/>
+                          <br />
+                          <input
+                            type="text"
+                            id="httpAddNumberInput"
+                            name="addUserNumber"
+                            maxlength="13"
+                            minlength="12"
+                            placeholder="+380687659752"
+                            required
+                          />
+                          <br />
+                          <br />
                           <button type="submit" class="button">Add</button>
                         </form>
+                      </div>
                     </div>
-              </div>
-            </article>
-            <article class=" forUpdate buttonHidenForEdit">
-              <div class="foundUsersHttpBlock divSize">
-                <div>
-                <h1 class="foundUserHttpTitle">Found User</h1>
-                <br/>
-                <p class="subtitleFoundUser">No user found</p>
-                <br/>
-                <button class="button hideButton buttonHttpEdit">Update</button>
-                <button class="button hideButton buttonHttpDelete">Delete</button>
-              </div>
-              </div>
-             
-            </article>
-            <article class="forUpdate buttonHidenForEdit">
-              <div class="hictoryHttpBlock divSize">
-                <div>
-                <h1 class="operationsHttp">Operations</h1>
-                <ul class="httpList">
-                    <li class="httpLi">Empty</li>
-                </ul>
+                  </article>
+                  <article class="forUpdate buttonHidenForEdit">
+                    <div class="foundUsersHttpBlock divSize">
+                      <div>
+                        <h1 class="foundUserHttpTitle">Found User</h1>
+                        <br />
+                        <p class="subtitleFoundUser">No user found</p>
+                        <br />
+                        <button class="button hideButton buttonHttpEdit">
+                          Update
+                        </button>
+                        <button class="button hideButton buttonHttpDelete">
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="forUpdate buttonHidenForEdit operations">
+                    <div class="hictoryHttpBlock divSize">
+                      <div>
+                        <h1 class="operationsHttp">Operations</h1>
+                        <ul class="httpList">
+                          <li class="httpLi">Empty</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
                 </div>
               </div>
-            </article>
+            </div>
+
+            <!--  -->
           </div>
         </div>
       </div>
+    </div>
 
+    <!-- http scripts -->
+    <script type="module" src="findRequest.js"></script>
+    <script type="module" src="addRequest.js"></script>
+    <script type="module" src="updateRequest.js"></script>
+    <script type="module" src="deleteRequest.js"></script>
+    <script type="module" src="getAllUser.js"></script>
 
+    <!-- socket scripts -->
+    <script src="/socket.io/socket.io.js"></script>
 
+    <script type="module" src="socketRequest.js"></script>
+    <script type="module" src="foundInfo.js"></script>
 
-  <script>
-console.log(document.cookie);
-  </script>
+    <script>
+      console.log(localStorage.getItem("Authorization"));
+    </script>
+    <!-- <script src="loginRequest.js"></script> -->
 
-
-  
- <!-- http scripts -->
-  <script type="module" src="findRequest.js"></script>
-  <script type="module" src="addRequest.js"></script>
-  <script type="module" src="updateRequest.js"></script>
-  <script type="module" src="deleteRequest.js"></script>
-  <script type="module" src="getAllUser.js"></script>
-
-  <!-- socket scripts -->
-  <script  src="/socket.io/socket.io.js"></script>
-  
-  <script type="module" src="socketRequest.js"></script>
-  <script type="module" src="foundInfo.js"></script>
-
-  <!-- <script src="loginRequest.js"></script> -->
-
-
-
-  <!-- <script type="module" src="longPolling.js"></script> -->
+    <!-- <script type="module" src="longPolling.js"></script> -->
   </body>
 </html>

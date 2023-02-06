@@ -1,17 +1,18 @@
-//generation of access token
+//генерація refresh токена
 import dotev from "dotenv";
 dotev.config();
-const key = process.env.KEY;
+const refreshKey = process.env.REFRESH_KEY;
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 let jwt = require("jsonwebtoken");
-function genAccsessToken(id, username) {
+
+function genRefreshToken(id, username) {
   const payload = {
     id,
     username,
   };
 
-  return jwt.sign(payload, key, { expiresIn: "15m" });
+  return jwt.sign(payload, refreshKey, { expiresIn: "3d" });
 }
 
-export { genAccsessToken };
+export { genRefreshToken };

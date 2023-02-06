@@ -7,39 +7,51 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 let bcrypt = require("bcryptjs");
 
-//генерація аксес токена
+//access function
 import { genAccsessToken } from "../otherFunc/genAccsesToken.js";
+
+// refresh function
+import { genRefreshToken } from "../otherFunc/genRefreshToken.js";
+
+import { addRefreshTokenToDatabase } from "../dataBaseFunc/addRefToDatabase.js";
 
 let userToken = undefined;
 let userTokens = undefined;
 
 routerAuth.post("/auth", async (req, res) => {
   try {
-    const userNameAuth = req.body.authUserName;
-    const userPasswordAuth = req.body.authUserPassword;
-    let userAuth = await findsRegistUser(userNameAuth);
+    const userNameAuth = req.body.authUserName.trim();
+    const userPasswordAuth = req.body.authUserPassword.trim();
+    let userAuth = await findsRegistUser(userNameAuth.trim());
     if (!userAuth) {
-      res.json({ success: false });
+      res.json({ success: "noUser" });
     } else {
-      //порівнюєм паролі
+      //compare passwords
       const validPerson = bcrypt.compareSync(
-        userPasswordAuth,
+        userPasswordAuth.trim(),
         userAuth.password
       );
 
       if (!validPerson) {
         return res.json({ success: false });
       }
-      //генерація Accsess токена
+      // generation of access token
       userToken = genAccsessToken(userAuth._id, userAuth.userName);
+      // generation of Refresh token
+      let userRefreshToken = genRefreshToken(userAuth._id, userAuth.userName);
+      if (userAuth.refresh == "I registered") {
+        await addRefreshTokenToDatabase(userAuth._id, userRefreshToken);
+      }
 
-      userTokens = userToken;
+      console.log("REFRESH " + userRefreshToken);
+
       console.log(userToken);
-      res.cookie("token", userTokens, {
+      // res.setHeader("Authorization", `Bearer ${userToken}`);
+      res.cookie("token", userToken, {
         httpOnly: true,
-        maxAge: 10000,
+        maxAge: 259200000,
       });
-      //res.setHeader("Authorization", userToken);
+      //res.header("Authorization", userToken);
       return res.send({ value: userToken });
     }
   } catch (e) {

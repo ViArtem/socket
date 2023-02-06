@@ -9,7 +9,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
     let result = await response.json();
     renderUser(result);
-    console.log(result);
   })();
 });
 function renderUser(usersArr) {
@@ -21,3 +20,40 @@ function renderUser(usersArr) {
     availHeader.append(newUser);
   }
 }
+
+// receive the data of the registered user
+window.addEventListener("load", () => {
+  (async function getUsers() {
+    let response = await fetch("/userValue", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+    });
+
+    let result = await response.json();
+
+    authUser(result);
+  })();
+});
+function authUser(user) {
+  let availHeader = document.querySelector(".users");
+  let newUser = document.createElement("p");
+  newUser.classList.add("userName");
+  newUser.innerHTML = `USER: ${user.username} `;
+  availHeader.prepend(newUser);
+}
+
+//sign out of the account
+document.querySelector(".exit").addEventListener("click", async () => {
+  let response = await fetch("/exit", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+  });
+
+  if (await response) {
+    return (window.location.href = "/");
+  }
+});

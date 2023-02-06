@@ -2,7 +2,7 @@ import express from "express";
 import { createRequire } from "node:module";
 import path from "path";
 const require = createRequire(import.meta.url);
-let cookieParser = require("cookie-parser");
+//let cookieParser = require("cookie-parser");
 import { routerGet } from "./Routes/getRouter.js";
 
 import { startHttpServer } from "./startServers/httpServ.js";
@@ -34,10 +34,14 @@ let bodyParser = require("body-parser");
 
 app.set("view engine", "html");
 
+let cookieParser = require("cookie-parser");
+/*
 const customHeadersAppLevel = function (req, res, next) {
   req.headers["Authorization"] = userTokens;
   next();
 };
+*/
+
 //app.use(customHeadersAppLevel);
 // app.use('/', function (req, res) {
 //   let url = config.API_HOST + req.ur
@@ -46,6 +50,7 @@ const customHeadersAppLevel = function (req, res, next) {
 // })
 
 let allMiddleware = [
+  cookieParser(),
   //customHeadersAppLevel, // встановлення кастомних заголовків
   routerGet,
   bodyParser.urlencoded({ extended: true }),
@@ -60,7 +65,6 @@ let allMiddleware = [
   routerAdd,
   routerEdit,
   router,
-  // cookieParser(),
 ];
 
 allMiddleware.forEach((elm) => app.use(elm));

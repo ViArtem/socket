@@ -1,9 +1,9 @@
 import { Router } from "express";
 const routerRegist = Router();
-//функція пошуку користувача за логіном
+//user search function by login
 import { findsRegistUser } from "../dataBaseFunc/registFind.js";
 
-// реєстрація нового користувача
+// new user registration
 import { registNewUser } from "../dataBaseFunc/registFunc.js";
 
 import { createRequire } from "node:module";
@@ -12,20 +12,19 @@ let bcrypt = require("bcryptjs");
 
 routerRegist.post("/regist", async (req, res) => {
   try {
-    // отримуєм дані з форми
-    const userName = req.body.registUserName;
-    const userPassword = req.body.registUserPassword;
-    if (userName.trim() == "" || userPassword.trim() == "") {
+    // receive data from the form
+    const userName = req.body.registUserName.trim();
+    const userPassword = req.body.registUserPassword.trim();
+    if (userName == "" || userPassword == "") {
       res.json({ success: false });
     } else {
-      // перевірям зареєстровано такого користувача
+      // check if such a user is registered
       const candidate = await findsRegistUser(userName);
-      // console.log("cand" + candidate);
 
       if (candidate) {
         return res.json({ success: false });
       }
-      // хешуєм пароль та зберігаєм користувача в базі даних
+      // hash the password and store the user in the database
       let hashPassword = bcrypt.hashSync(userPassword, 7);
       let newUser = await registNewUser(userName, hashPassword);
       //
