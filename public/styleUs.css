@@ -32,6 +32,8 @@ html,
 body {
 
     height: 100%;
+    width: 100%;
+    background-color: #2f2f2f;
     font-family: "Roboto";
     color: white;
 }
@@ -89,6 +91,14 @@ body {
     } 
    
   
+  .checkPassword{
+    position: relative;
+    top: -18px;
+    left: 170px;
+    width: 40px;
+  }
+
+
   .authForm {
   }
   .userAuthLogin {

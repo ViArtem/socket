@@ -43,9 +43,9 @@ routerAuth.post("/auth", async (req, res) => {
         await addRefreshTokenToDatabase(userAuth._id, userRefreshToken);
       }
 
-      console.log("REFRESH " + userRefreshToken);
+      //console.log("REFRESH " + userRefreshToken);
 
-      console.log(userToken);
+      //console.log(userToken);
       // res.setHeader("Authorization", `Bearer ${userToken}`);
       res.cookie("token", userToken, {
         httpOnly: true,

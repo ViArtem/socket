@@ -12,9 +12,20 @@ let bcrypt = require("bcryptjs");
 
 routerRegist.post("/regist", async (req, res) => {
   try {
+    const regularForPassword = new RegExp(
+      "(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,}",
+      "g"
+    );
+
     // receive data from the form
     const userName = req.body.registUserName.trim();
     const userPassword = req.body.registUserPassword.trim();
+    let validateUserPassword = regularForPassword.test(userPassword);
+
+    if (validateUserPassword == false) {
+      return res.json({ password: false });
+    }
+
     if (userName == "" || userPassword == "") {
       res.json({ success: false });
     } else {

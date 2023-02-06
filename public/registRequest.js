@@ -20,9 +20,11 @@ window.addEventListener("load", () => {
     let result = await response.json();
     if (result.success) {
       window.location.href = "/auth";
-    } else {
-      alert("Incorrect validation");
-    }
+    } else if (!result.password) {
+      alert(
+        "Password must be at least 6 characters long, must contain at least one special character, one number, and available lowercase and uppercase Latin letters"
+      );
+    } else alert("Incorrect validation");
   }
   const addForm = document.getElementById("registFormId");
   addForm.addEventListener("submit", async (event) => {
@@ -30,4 +32,15 @@ window.addEventListener("load", () => {
 
     await sendData();
   });
+});
+
+let showPassword = document.querySelector(".checkPassword");
+showPassword.addEventListener("click", () => {
+  let password = document.querySelector(".userRegistPassword");
+  const type =
+    password.getAttribute("type") === "password" ? "text" : "password";
+  password.setAttribute("type", type);
+  if (showPassword.innerHTML == "Show") {
+    showPassword.innerHTML = "Hide";
+  } else showPassword.innerHTML = "Show";
 });

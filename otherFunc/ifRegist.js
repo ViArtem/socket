@@ -33,7 +33,7 @@ async function checkRegist(req, res, next) {
   } catch (e) {
     //
     console.log(e);
-    console.log(req.headers);
+    // console.log(req.headers);
 
     if (e instanceof jwt.TokenExpiredError) {
       console.log(
@@ -55,6 +55,9 @@ async function checkRegist(req, res, next) {
       });
       return res.redirect("/");
     }
+    res.cookie("token", "eww", {
+      maxAge: 259200000,
+    });
     res.redirect("/auth");
     next();
   }

@@ -22,12 +22,12 @@
             <label for="">Enter password</label>
             <br />
             <input
-              type="text"
+              type="password"
               class="userAuthPassword"
               id="userAuthPasswordId"
             />
-            <br />
-            <br />
+            <p class="checkPassword">Show</p>
+
             <button class="button buttonAuthorization">Log in</button>
           </form>
           <br />
@@ -37,7 +37,9 @@
         </div>
       </div>
     </div>
-
+    <script>
+      console.log(localStorage.getItem("Authorization"));
+    </script>
     <script src="loginRequest.js"></script>
   </body>
 </html>

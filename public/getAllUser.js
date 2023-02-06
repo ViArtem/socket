@@ -54,6 +54,7 @@ document.querySelector(".exit").addEventListener("click", async () => {
   });
 
   if (await response) {
+    localStorage.clear();
     return (window.location.href = "/");
   }
 });

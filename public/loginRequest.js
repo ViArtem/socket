@@ -36,3 +36,27 @@ window.addEventListener("load", () => {
     await sendData();
   });
 });
+
+// берем локалсторедж тест
+window.addEventListener("DOMContentLoaded", () => {
+  (async function setCookie() {
+    if ((document.cookie = "eww")) {
+      localStorage.clear();
+    }
+    if (localStorage.getItem("Authorization") != null) {
+      document.cookie = `token=${localStorage.getItem("Authorization")}`; //  "username=John Doe";
+      return (window.location.href = "/");
+    }
+  })();
+});
+
+let showPassword = document.querySelector(".checkPassword");
+showPassword.addEventListener("click", () => {
+  let password = document.querySelector(".userAuthPassword");
+  const type =
+    password.getAttribute("type") === "password" ? "text" : "password";
+  password.setAttribute("type", type);
+  if (showPassword.innerHTML == "Show") {
+    showPassword.innerHTML = "Hide";
+  } else showPassword.innerHTML = "Show";
+});

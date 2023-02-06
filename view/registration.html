@@ -12,6 +12,7 @@
       <div class="authFormContainer">
         <div class="authFormBlock">
           <h1 class="registHeader">Registration</h1>
+          <br />
           <form action="" class="registForm" id="registFormId">
             <label for="">Enter login</label>
             <br />
@@ -21,13 +22,18 @@
             <label for="">Enter password</label>
             <br />
             <input
-              type="text"
+              type="password"
               class="userRegistPassword"
               id="userRegistPasswordId"
             />
             <br />
-            <br />
+            <p class="checkPassword">Show</p>
+
             <button class="button buttonAuthorization">Log on</button>
+          </form>
+          <br />
+          <form action="/auth" method="get">
+            <button class="button">Log in</button>
           </form>
         </div>
       </div>
